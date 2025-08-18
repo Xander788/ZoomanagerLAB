@@ -21,9 +21,9 @@ public class frmAnimals extends javax.swing.JFrame {
     public frmAnimals() {
         initComponents();
         list = new AnimalHashMap();
-        //list.add(new Animal("M-0001","Marito","Mono",LocalDate.now()));
-        //list.add(new Animal("M-0002","luis","Mono",LocalDate.now()));
-        //list.add(new Animal("C-0001","jorge","cocodrilo",LocalDate.now()));
+        list.add(new Animal("M-0001","Marito","Mono",LocalDate.now()));
+        list.add(new Animal("M-0002","luis","Mono",LocalDate.now()));
+        list.add(new Animal("C-0001","jorge","cocodrilo",LocalDate.now()));
         enseñarZonas(); 
         enseñarEspecies();
     }
@@ -77,7 +77,7 @@ public class frmAnimals extends javax.swing.JFrame {
     }
     
     private void update(){
-        if(validateRequiere()){
+        if(!validateRequiere()){
             UtilGui.showErrorMessage(this,"fatan datos requeridos", "error");
             return;
         }
@@ -110,6 +110,15 @@ public class frmAnimals extends javax.swing.JFrame {
         FrmBuscarAnimals frm = new FrmBuscarAnimals(this,true);
         frm.setList(list);
         frm.setVisible(true);
+        frm.addWindowListener(new java.awt.event.WindowAdapter() {
+        @Override
+        public void windowClosed(java.awt.event.WindowEvent e) {
+            Animal seleccionado = frm.getAnimal();
+            if (seleccionado != null) {
+                animal = seleccionado;
+                showdata();
+            }
+        }});
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -382,6 +391,7 @@ public class frmAnimals extends javax.swing.JFrame {
 
     private void btmBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmBuscarActionPerformed
         search();
+        
     }//GEN-LAST:event_btmBuscarActionPerformed
 
     private void txtFechaNacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaNacimientoActionPerformed

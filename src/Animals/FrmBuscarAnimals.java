@@ -5,6 +5,7 @@
 package Animals;
 
 import Utils.UtilDate;
+import Utils.UtilGui;
 import java.util.HashMap;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -158,11 +159,20 @@ public class FrmBuscarAnimals extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFilterActionPerformed
-        // TODO add your handling code here:
+        rowFilter = RowFilter.regexFilter("(?i)" + txtFilter.getText());
+        sorter.setRowFilter(rowFilter);
     }//GEN-LAST:event_txtFilterActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        int row =tblAnimales.getSelectedRow();
+        if (row==-1){
+            UtilGui.showErrorMessage(this, "Debe seleccionar un empleado", "Error");
+            return;
+        }
+        String id=String.valueOf(tblAnimales.getValueAt(row,0));
+        animal=list.find(id);
+        setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
