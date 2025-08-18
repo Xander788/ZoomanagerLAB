@@ -32,7 +32,4 @@ public class Visit {
     public String toString() {
         return "Visit{" + "visitor=" + visitor + ", date=" + date + '}';
     }
-    
-    
-    
 }
