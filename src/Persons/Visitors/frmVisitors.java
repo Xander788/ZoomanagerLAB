@@ -4,8 +4,6 @@
  */
 package Persons.Visitors;
 
-import Animals.FrmBuscarAnimals;
-import Animals.Zone;
 import Utils.UtilDate;
 import static Utils.UtilDate.calculateAge;
 import Utils.UtilGui;
@@ -66,7 +64,6 @@ public class frmVisitors extends javax.swing.JFrame {
         UtilGui.showMessage(this, "Visitante agregado: " + visitor.getName(), "Agregado");
     }
 
-    
     private void update(){
         if(validateRequiere()){
             UtilGui.showErrorMessage(this,"fatan datos requeridos", "error");
