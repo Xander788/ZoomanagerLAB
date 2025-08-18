@@ -25,7 +25,4 @@ public class Visitor extends Person {
     public String toString() {
         return "Visitor{" +super.toString()+ '}';
     }
-    
-    
-    
 }
