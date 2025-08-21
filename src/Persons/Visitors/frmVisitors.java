@@ -4,6 +4,7 @@
  */
 package Persons.Visitors;
 
+import Animals.Animal;
 import Utils.UtilDate;
 import static Utils.UtilDate.calculateAge;
 import Utils.UtilGui;
@@ -65,7 +66,7 @@ public class frmVisitors extends javax.swing.JFrame {
     }
 
     private void update(){
-        if(validateRequiere()){
+        if(!validateRequiere()){
             UtilGui.showErrorMessage(this,"fatan datos requeridos", "error");
             return;
         }
@@ -109,6 +110,15 @@ public class frmVisitors extends javax.swing.JFrame {
         FrmBuscarVisitors frm = new FrmBuscarVisitors(this,true);
         frm.setList(list);
         frm.setVisible(true);
+        frm.addWindowListener(new java.awt.event.WindowAdapter() {
+        @Override
+        public void windowClosed(java.awt.event.WindowEvent e) {
+            Visitor seleccionado = frm.getVisitor();
+            if (seleccionado != null) {
+                visitor = seleccionado;
+                showdata();
+            }
+        }});
     }
     /**
      * This method is called from within the constructor to initialize the form.

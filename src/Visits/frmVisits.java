@@ -4,6 +4,7 @@
  */
 package Visits;
 
+import Animals.Animal;
 import Persons.Visitors.Visitor;
 import Utils.UtilDate;
 import Utils.UtilGui;
@@ -71,21 +72,21 @@ public class frmVisits extends javax.swing.JFrame {
     
     private void delete(){
         if(visit==null){
-            UtilGui.showErrorMessage(this, "Debe especificar el animal", "Eror");
+            UtilGui.showErrorMessage(this, "Debe especificar la visita ", "Eror");
             return;
         }
         if(!list.delete(visit)){
-            JOptionPane.showMessageDialog(this, "No se elimino el resgistro del animl");
+            JOptionPane.showMessageDialog(this, "No se elimino el resgistro de la visita ");
             return;
         }
-        UtilGui.showMessage(this, "Último visitante eliminado: " + visit.getVisitor().getName(), "Eliminado");
+        UtilGui.showMessage(this, "Último visita eliminada : " + visit.getVisitor().getName(), "Eliminado");
         clear();
     }
     
     private void update() {
         // Verificar que haya un visitante seleccionado
         if (visit.getVisitor() == null) {
-            UtilGui.showErrorMessage(this, "Debe seleccionar un visitante primero", "Error");
+            UtilGui.showErrorMessage(this, "Debe seleccionar un visita primero", "Error");
             return;
         }
 
@@ -116,6 +117,15 @@ public class frmVisits extends javax.swing.JFrame {
         FrmBuscarVisit frm = new FrmBuscarVisit (this,true);
         frm.setList(list);
         frm.setVisible(true);
+        frm.addWindowListener(new java.awt.event.WindowAdapter() {
+        @Override
+        public void windowClosed(java.awt.event.WindowEvent e) {
+            Visit seleccionado = frm.getVisit();
+            if (seleccionado != null) {
+                visit = seleccionado;
+                showData();
+            }
+        }});
     }
     /**
      * This method is called from within the constructor to initialize the form.
